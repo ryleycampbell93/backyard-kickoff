@@ -1,150 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Backyard Kickoff</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Backyard Kickoff</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(#15803d, #052e16);
-      color: white;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  background:
+    linear-gradient(rgba(0,0,0,.30), rgba(0,0,0,.72)),
+    url("609DF914-C4E1-4512-9C0F-3E452062484D.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 
-    .app {
-      width: 100%;
-      max-width: 430px;
-      padding: 25px;
-    }
+.app {
+  min-height: 100vh;
+  padding: 25px 14px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
-    .ball {
-      font-size: 70px;
-    }
+h1 {
+  font-size: 38px;
+  margin: 0;
+  text-shadow: 0 3px 10px black;
+}
 
-    h1 {
-      font-size: 38px;
-      margin: 10px 0 5px;
-    }
+.subtitle {
+  margin: 5px 0 18px;
+  font-weight: bold;
+  text-shadow: 0 2px 6px black;
+}
 
-    .created {
-      opacity: 0.8;
-      margin-bottom: 30px;
-    }
+.scoreboard {
+  display: flex;
+  gap: 10px;
+}
 
-    .scoreboard {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-    }
+.team {
+  flex: 1;
+  padding: 14px 9px;
+  border-radius: 22px;
+  background: rgba(0,0,0,.68);
+  backdrop-filter: blur(6px);
+  border: 2px solid rgba(255,255,255,.35);
+}
 
-    .team {
-      flex: 1;
-      background: rgba(255,255,255,0.12);
-      border-radius: 20px;
-      padding: 20px 10px;
-    }
+.team-name {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 5px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+}
 
-    .team input {
-      width: 100%;
-      border: 0;
-      border-radius: 10px;
-      padding: 10px;
-      text-align: center;
-      font-size: 17px;
-      font-weight: bold;
-    }
+.options {
+  display: flex;
+  gap: 5px;
+  margin-top: 8px;
+}
 
-    .score {
-      font-size: 70px;
-      font-weight: bold;
-      margin: 15px 0;
-    }
+select, input[type="color"] {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  border: none;
+  border-radius: 9px;
+  font-size: 18px;
+}
 
-    .goal {
-      width: 100%;
-      border: none;
-      border-radius: 15px;
-      padding: 17px 5px;
-      font-size: 19px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.flag {
+  font-size: 35px;
+  margin-top: 8px;
+}
 
-    .reset {
-      margin-top: 25px;
-      border: 2px solid white;
-      background: transparent;
-      color: white;
-      border-radius: 15px;
-      padding: 13px 25px;
-      font-size: 16px;
-    }
-  </style>
+.score {
+  font-size: 72px;
+  line-height: 1;
+  font-weight: 900;
+  margin: 8px 0 12px;
+  text-shadow: 0 3px 8px black;
+}
+
+.goal {
+  width: 100%;
+  padding: 15px 4px;
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-size: 17px;
+  font-weight: 900;
+  background: #16a34a;
+}
+
+.goal:active {
+  transform: scale(.95);
+}
+
+.controls {
+  margin-top: 14px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.control {
+  padding: 12px 16px;
+  border: 2px solid white;
+  border-radius: 14px;
+  background: rgba(0,0,0,.65);
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.goal-message {
+  height: 42px;
+  font-size: 30px;
+  font-weight: 900;
+  margin: 10px 0 4px;
+  text-shadow: 0 3px 8px black;
+}
+
+.credit {
+  margin-top: 10px;
+  font-size: 13px;
+  opacity: .9;
+}
+</style>
 </head>
 
 <body>
 
-  <main class="app">
+<div class="app">
 
-    <div class="ball">⚽️</div>
+  <h1>⚽ Backyard Kickoff</h1>
+  <div class="subtitle">Pick your teams. Start the match!</div>
 
-    <h1>Backyard Kickoff</h1>
+  <div id="goalMessage" class="goal-message"></div>
 
-    <div class="created">Created by Arlo</div>
+  <div class="scoreboard">
 
-    <div class="scoreboard">
+    <div class="team">
+      <input class="team-name" id="name1" value="Arlo United">
 
-      <div class="team">
-        <input value="Team 1">
-        <div class="score" id="score1">0</div>
-        <button class="goal" onclick="goal(1)">⚽ ADD GOAL</button>
+      <div class="options">
+        <select id="flag1" onchange="changeFlag(1)">
+          <option value="🇦🇺">🇦🇺 Australia</option>
+          <option value="🇦🇷">🇦🇷 Argentina</option>
+          <option value="🇧🇷">🇧🇷 Brazil</option>
+          <option value="🇫🇷">🇫🇷 France</option>
+          <option value="🇩🇪">🇩🇪 Germany</option>
+          <option value="🇮🇹">🇮🇹 Italy</option>
+          <option value="🇵🇹">🇵🇹 Portugal</option>
+          <option value="🇪🇸">🇪🇸 Spain</option>
+          <option value="🏴">🏴 England</option>
+          <option value="🇳🇱">🇳🇱 Netherlands</option>
+        </select>
+
+        <input type="color" id="colour1" value="#e11d48"
+          onchange="changeColour(1)">
       </div>
 
-      <div class="team">
-        <input value="Team 2">
-        <div class="score" id="score2">0</div>
-        <button class="goal" onclick="goal(2)">⚽ ADD GOAL</button>
-      </div>
+      <div id="flagDisplay1" class="flag">🇦🇺</div>
+      <div id="score1" class="score">0</div>
 
+      <button id="goal1" class="goal" onclick="goal(1)">
+        ⚽ GOAL!
+      </button>
     </div>
 
-    <button class="reset" onclick="resetGame()">New Game</button>
 
-  </main>
+    <div class="team">
+      <input class="team-name" id="name2" value="Dad FC">
 
-  <script>
-    let team1 = 0;
-    let team2 = 0;
+      <div class="options">
+        <select id="flag2" onchange="changeFlag(2)">
+          <option value="🇦🇺">🇦🇺 Australia</option>
+          <option value="🇦🇷">🇦🇷 Argentina</option>
+          <option value="🇧🇷">🇧🇷 Brazil</option>
+          <option value="🇫🇷">🇫🇷 France</option>
+          <option value="🇩🇪">🇩🇪 Germany</option>
+          <option value="🇮🇹">🇮🇹 Italy</option>
+          <option value="🇵🇹">🇵🇹 Portugal</option>
+          <option value="🇪🇸">🇪🇸 Spain</option>
+          <option value="🏴">🏴 England</option>
+          <option value="🇳🇱">🇳🇱 Netherlands</option>
+        </select>
 
-    function goal(team) {
-      if (team === 1) {
-        team1++;
-        document.getElementById("score1").textContent = team1;
-      } else {
-        team2++;
-        document.getElementById("score2").textContent = team2;
-      }
-    }
+        <input type="color" id="colour2" value="#2563eb"
+          onchange="changeColour(2)">
+      </div>
 
-    function resetGame() {
-      team1 = 0;
-      team2 = 0;
+      <div id="flagDisplay2" class="flag">🇦🇺</div>
+      <div id="score2" class="score">0</div>
 
-      document.getElementById("score1").textContent = 0;
-      document.getElementById("score2").textContent = 0;
-    }
-  </script>
+      <button id="goal2" class="goal" onclick="goal(2)">
+        ⚽ GOAL!
+      </button>
+    </div>
+
+  </div>
+
+  <div class="controls">
+    <button class="control" onclick="undoGoal()">↩ Undo</button>
+    <button class="control" onclick="resetGame()">🔄 New Game</button>
+    <button class="control" onclick="toggleSound()">🔊 Sound</button>
+  </div>
+
+  <div class="credit">Created by Arlo ⚽</div>
+
+</div>
+
+<script>
+let scores = [0, 0];
+let lastTeam = null;
+let soundOn = true;
+
+function goal(team) {
+  const index = team - 1;
+  scores[index]++;
+
+  document.getElementById("score" + team).textContent = scores[index];
+  lastTeam = team;
+
+  const name = document.getElementById("name" + team).value || "Team " + team;
+
+  document.getElementById("goalMessage").textContent =
+    "⚽ GOOOOAL! " + name + "!";
+
+  if (soundOn) playGoalSound();
+
+  setTimeout(() => {
+    document.getElementById("goalMessage").textContent = "";
+  }, 1800);
+}
+
+function undoGoal() {
+  if (lastTeam && scores[lastTeam - 1] > 0) {
+    scores[lastTeam - 1]--;
+    document.getElementById("score" + lastTeam).textContent =
+      scores[lastTeam - 1];
+  }
+}
+
+function resetGame() {
+  scores = [0, 0];
+  lastTeam = null;
+
+  document.getElementById("score1").textContent = "0";
+  document.getElementById("score2").textContent = "0";
+  document.getElementById("goalMessage").textContent = "⚽ NEW MATCH!";
+}
+
+function changeFlag(team) {
+  document.getElementById("flagDisplay" + team).textContent =
+    document.getElementById("flag" + team).value;
+}
+
+function changeColour(team) {
+  document.getElementById("goal" + team).style.background =
+    document.getElementById("colour" + team).value;
+}
+
+function toggleSound() {
+  soundOn = !soundOn;
+  document.getElementById("goalMessage").textContent =
+    soundOn ? "🔊 SOUND ON" : "🔇 SOUND OFF";
+}
+
+function playGoalSound() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const ctx = new AudioContext();
+
+    const notes = [392, 523, 659, 784];
+
+    notes.forEach((frequency, i) => {
+      const oscillator = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      oscillator.connect(gain);
+      gain.connect(ctx.destination);
+
+      oscillator.frequency.value = frequency;
+      oscillator.type = "square";
+
+      const start = ctx.currentTime + i * 0.12;
+
+      gain.gain.setValueAtTime(0.12, start);
+      gain.gain.exponentialRampToValueAtTime(0.01, start + 0.22);
+
+      oscillator.start(start);
+      oscillator.stop(start + 0.22);
+    });
+  } catch (e) {}
+}
+
+changeColour(1);
+changeColour(2);
+</script>
 
 </body>
 </html>
