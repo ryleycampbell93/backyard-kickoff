@@ -31,7 +31,7 @@ body {
     linear-gradient(rgba(0,0,0,.05), rgba(0,0,0,.18)),
     url("609DF914-C4E1-4512-9C0F-3E452062484D.png");
   background-size: cover;
-  background-position: center 68%;
+  background-position: center 58%;
 }
 
 .hero-title {
@@ -174,7 +174,7 @@ body {
 @media (max-width: 390px) {
   .hero {
     min-height: 50vh;
-    background-position: center 70%;
+    background-position: center 60%;
   }
 
   .hero-title h1 {
@@ -255,7 +255,6 @@ body {
 
     </div>
 
-
     <div class="team">
 
       <div class="team-top">
@@ -297,7 +296,6 @@ body {
       </div>
 
     </div>
-
 
     <div class="controls">
 
@@ -362,7 +360,6 @@ function goal(team) {
   }, 2200);
 }
 
-
 function playGoalSound() {
 
   const sound =
@@ -374,7 +371,6 @@ function playGoalSound() {
   sound.play().catch(() => {});
 
 }
-
 
 function undoGoal() {
 
@@ -391,7 +387,6 @@ function undoGoal() {
 
 }
 
-
 function resetGame() {
 
   scores = [0, 0];
@@ -405,7 +400,6 @@ function resetGame() {
 
 }
 
-
 function changeFlag(team) {
 
   document.getElementById(
@@ -416,7 +410,6 @@ function changeFlag(team) {
     ).value;
 
 }
-
 
 function changeColour(team) {
 
@@ -429,7 +422,6 @@ function changeColour(team) {
 
 }
 
-
 function toggleSound() {
 
   soundOn = !soundOn;
@@ -440,7 +432,6 @@ function toggleSound() {
       : "🔇 SOUND OFF";
 
 }
-
 
 changeColour(1);
 changeColour(2);
