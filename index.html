@@ -14,173 +14,183 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: Arial, sans-serif;
+  background: #0b0f14;
   color: white;
-  text-align: center;
-  background:
-    linear-gradient(rgba(0,0,0,.28), rgba(0,0,0,.78)),
-    url("609DF914-C4E1-4512-9C0F-3E452062484D.png");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
 }
 
 .app {
   min-height: 100vh;
-  padding: 28px 14px 30px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
 }
 
-.header {
-  margin-bottom: 14px;
+.hero {
+  min-height: 52vh;
+  position: relative;
+  background:
+    linear-gradient(rgba(0,0,0,.05), rgba(0,0,0,.18)),
+    url("609DF914-C4E1-4512-9C0F-3E452062484D.png");
+  background-size: cover;
+  background-position: center 68%;
 }
 
-h1 {
-  font-size: 34px;
+.hero-title {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  text-shadow: 0 3px 12px #000;
+}
+
+.hero-title h1 {
   margin: 0;
-  text-shadow: 0 3px 10px black;
+  font-size: 34px;
+  font-weight: 900;
 }
 
-.subtitle {
-  margin-top: 6px;
-  font-size: 16px;
+.hero-title p {
+  margin: 5px 0 0;
   font-weight: bold;
-  text-shadow: 0 2px 6px black;
+  font-size: 15px;
 }
 
 .goal-message {
-  min-height: 38px;
-  font-size: 26px;
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 16px;
+  text-align: center;
+  font-size: 28px;
   font-weight: 900;
-  margin-bottom: 8px;
-  text-shadow: 0 3px 8px black;
+  text-shadow: 0 3px 10px black;
+  min-height: 36px;
 }
 
-.scoreboard {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.game-panel {
+  background: #111820;
+  padding: 14px;
+  border-radius: 24px 24px 0 0;
+  margin-top: -6px;
 }
 
 .team {
-  background: rgba(0,0,0,.72);
-  border: 2px solid rgba(255,255,255,.4);
-  border-radius: 22px;
-  padding: 13px;
-  backdrop-filter: blur(7px);
+  background: #1a222c;
+  border: 1px solid #33404d;
+  border-radius: 18px;
+  padding: 11px;
+  margin-bottom: 10px;
 }
 
 .team-top {
-  display: flex;
-  gap: 8px;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 90px 50px;
+  gap: 7px;
 }
 
 .team-name {
-  flex: 1;
+  width: 100%;
   min-width: 0;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 10px;
-  font-size: 19px;
+  border: 0;
+  border-radius: 11px;
+  padding: 11px 8px;
+  font-size: 18px;
   font-weight: bold;
   text-align: center;
 }
 
 .flag-select {
-  width: 95px;
-  border: none;
-  border-radius: 12px;
-  padding: 10px 5px;
-  font-size: 17px;
+  border: 0;
+  border-radius: 11px;
+  padding: 8px 4px;
+  font-size: 16px;
 }
 
 .colour-picker {
-  width: 52px;
-  height: 44px;
+  width: 50px;
+  height: 42px;
+  border: 0;
+  border-radius: 11px;
   padding: 3px;
-  border: none;
-  border-radius: 12px;
-  background: white;
 }
 
-.team-main {
+.team-bottom {
   display: grid;
-  grid-template-columns: 80px 1fr 120px;
+  grid-template-columns: 65px 1fr 125px;
   align-items: center;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .flag {
-  font-size: 42px;
+  font-size: 38px;
+  text-align: center;
 }
 
 .score {
-  font-size: 70px;
+  font-size: 62px;
   line-height: 1;
+  text-align: center;
   font-weight: 900;
-  text-shadow: 0 3px 8px black;
 }
 
-.goal {
-  width: 100%;
-  min-height: 76px;
-  border: none;
-  border-radius: 18px;
+.goal-btn {
+  min-height: 66px;
+  border: 0;
+  border-radius: 16px;
   color: white;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 900;
-  box-shadow: 0 4px 12px rgba(0,0,0,.3);
 }
 
-.goal:active {
+.goal-btn:active {
   transform: scale(.96);
 }
 
 .controls {
   display: grid;
-  grid-template-columns: 1fr 1.25fr 1fr;
-  gap: 8px;
-  margin-top: 13px;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 7px;
+  margin-top: 4px;
 }
 
-.control {
-  border: 2px solid white;
-  border-radius: 15px;
-  padding: 12px 5px;
-  background: rgba(0,0,0,.72);
+.control-btn {
+  border: 1px solid #445160;
+  border-radius: 13px;
+  padding: 11px 4px;
+  background: #1a222c;
   color: white;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
 }
 
 .credit {
-  margin-top: 11px;
+  text-align: center;
   font-size: 13px;
-  opacity: .9;
+  opacity: .75;
+  margin-top: 10px;
 }
 
 @media (max-width: 390px) {
-  h1 {
+  .hero {
+    min-height: 50vh;
+    background-position: center 70%;
+  }
+
+  .hero-title h1 {
     font-size: 30px;
   }
 
-  .team-main {
-    grid-template-columns: 65px 1fr 105px;
+  .team-bottom {
+    grid-template-columns: 55px 1fr 110px;
   }
 
   .score {
-    font-size: 62px;
+    font-size: 56px;
   }
 
-  .goal {
-    font-size: 16px;
-  }
-
-  .control {
-    font-size: 13px;
+  .goal-btn {
+    font-size: 15px;
   }
 }
 </style>
@@ -190,20 +200,34 @@ h1 {
 
 <div class="app">
 
-  <div class="header">
-    <h1>⚽ Backyard Kickoff</h1>
-    <div class="subtitle">Pick your teams. Start the match!</div>
-  </div>
+  <section class="hero">
 
-  <div id="goalMessage" class="goal-message"></div>
+    <div class="hero-title">
+      <h1>⚽ Backyard Kickoff</h1>
+      <p>Pick your teams. Start the match!</p>
+    </div>
 
-  <div class="scoreboard">
+    <div id="goalMessage" class="goal-message"></div>
+
+  </section>
+
+  <section class="game-panel">
 
     <div class="team">
-      <div class="team-top">
-        <input class="team-name" id="name1" value="Arlo United">
 
-        <select class="flag-select" id="flag1" onchange="changeFlag(1)">
+      <div class="team-top">
+
+        <input
+          id="name1"
+          class="team-name"
+          value="Arlo United"
+        >
+
+        <select
+          id="flag1"
+          class="flag-select"
+          onchange="changeFlag(1)"
+        >
           <option value="🇦🇺">🇦🇺 AUS</option>
           <option value="🇦🇷">🇦🇷 ARG</option>
           <option value="🇧🇷">🇧🇷 BRA</option>
@@ -216,22 +240,50 @@ h1 {
           <option value="🇳🇱">🇳🇱 NED</option>
         </select>
 
-        <input class="colour-picker" type="color" id="colour1" value="#e11d48"
-          onchange="changeColour(1)">
+        <input
+          id="colour1"
+          class="colour-picker"
+          type="color"
+          value="#e11d48"
+          onchange="changeColour(1)"
+        >
+
       </div>
 
-      <div class="team-main">
+      <div class="team-bottom">
+
         <div id="flagDisplay1" class="flag">🇦🇺</div>
+
         <div id="score1" class="score">0</div>
-        <button id="goal1" class="goal" onclick="goal(1)">⚽ GOAL!</button>
+
+        <button
+          id="goal1"
+          class="goal-btn"
+          onclick="goal(1)"
+        >
+          ⚽ GOAL!
+        </button>
+
       </div>
+
     </div>
 
-    <div class="team">
-      <div class="team-top">
-        <input class="team-name" id="name2" value="Dad FC">
 
-        <select class="flag-select" id="flag2" onchange="changeFlag(2)">
+    <div class="team">
+
+      <div class="team-top">
+
+        <input
+          id="name2"
+          class="team-name"
+          value="Dad FC"
+        >
+
+        <select
+          id="flag2"
+          class="flag-select"
+          onchange="changeFlag(2)"
+        >
           <option value="🇦🇺">🇦🇺 AUS</option>
           <option value="🇦🇷">🇦🇷 ARG</option>
           <option value="🇧🇷">🇧🇷 BRA</option>
@@ -244,118 +296,218 @@ h1 {
           <option value="🇳🇱">🇳🇱 NED</option>
         </select>
 
-        <input class="colour-picker" type="color" id="colour2" value="#2563eb"
-          onchange="changeColour(2)">
+        <input
+          id="colour2"
+          class="colour-picker"
+          type="color"
+          value="#2563eb"
+          onchange="changeColour(2)"
+        >
+
       </div>
 
-      <div class="team-main">
+      <div class="team-bottom">
+
         <div id="flagDisplay2" class="flag">🇦🇺</div>
+
         <div id="score2" class="score">0</div>
-        <button id="goal2" class="goal" onclick="goal(2)">⚽ GOAL!</button>
+
+        <button
+          id="goal2"
+          class="goal-btn"
+          onclick="goal(2)"
+        >
+          ⚽ GOAL!
+        </button>
+
       </div>
+
     </div>
 
-  </div>
 
-  <div class="controls">
-    <button class="control" onclick="undoGoal()">↩ Undo</button>
-    <button class="control" onclick="resetGame()">🔄 New Game</button>
-    <button class="control" onclick="toggleSound()">🔊 Sound</button>
-  </div>
+    <div class="controls">
 
-  <div class="credit">Created by Arlo ⚽</div>
+      <button class="control-btn" onclick="undoGoal()">
+        ↩ Undo
+      </button>
+
+      <button class="control-btn" onclick="resetGame()">
+        🔄 New Game
+      </button>
+
+      <button class="control-btn" onclick="toggleSound()">
+        🔊 Sound
+      </button>
+
+    </div>
+
+    <div class="credit">
+      Created by Arlo ⚽
+    </div>
+
+  </section>
 
 </div>
 
+
 <script>
+
 let scores = [0, 0];
 let lastTeam = null;
 let soundOn = true;
 
 function goal(team) {
+
   const index = team - 1;
+
   scores[index]++;
 
-  document.getElementById("score" + team).textContent = scores[index];
+  document.getElementById("score" + team).textContent =
+    scores[index];
+
   lastTeam = team;
 
-  const name = document.getElementById("name" + team).value || "Team " + team;
+  const name =
+    document.getElementById("name" + team).value ||
+    "Team " + team;
 
   document.getElementById("goalMessage").textContent =
     "⚽ GOOOOAL! " + name + "!";
 
-  if (soundOn) playGoalSound();
+  if (soundOn) {
+    playGoalSound();
+  }
 
   setTimeout(() => {
     document.getElementById("goalMessage").textContent = "";
   }, 1800);
 }
 
+
 function undoGoal() {
+
   if (lastTeam && scores[lastTeam - 1] > 0) {
+
     scores[lastTeam - 1]--;
-    document.getElementById("score" + lastTeam).textContent =
+
+    document.getElementById(
+      "score" + lastTeam
+    ).textContent =
       scores[lastTeam - 1];
+
   }
+
 }
 
+
 function resetGame() {
+
   scores = [0, 0];
+
   lastTeam = null;
 
   document.getElementById("score1").textContent = "0";
   document.getElementById("score2").textContent = "0";
-  document.getElementById("goalMessage").textContent = "⚽ NEW MATCH!";
+
+  document.getElementById("goalMessage").textContent =
+    "⚽ NEW MATCH!";
+
 }
+
 
 function changeFlag(team) {
-  document.getElementById("flagDisplay" + team).textContent =
-    document.getElementById("flag" + team).value;
+
+  document.getElementById(
+    "flagDisplay" + team
+  ).textContent =
+    document.getElementById(
+      "flag" + team
+    ).value;
+
 }
+
 
 function changeColour(team) {
-  document.getElementById("goal" + team).style.background =
-    document.getElementById("colour" + team).value;
+
+  document.getElementById(
+    "goal" + team
+  ).style.background =
+    document.getElementById(
+      "colour" + team
+    ).value;
+
 }
 
+
 function toggleSound() {
+
   soundOn = !soundOn;
 
   document.getElementById("goalMessage").textContent =
-    soundOn ? "🔊 SOUND ON" : "🔇 SOUND OFF";
+    soundOn
+      ? "🔊 SOUND ON"
+      : "🔇 SOUND OFF";
+
 }
 
+
 function playGoalSound() {
+
   try {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
     const ctx = new AudioContext();
 
     const notes = [392, 523, 659, 784];
 
     notes.forEach((frequency, i) => {
-      const oscillator = ctx.createOscillator();
-      const gain = ctx.createGain();
+
+      const oscillator =
+        ctx.createOscillator();
+
+      const gain =
+        ctx.createGain();
 
       oscillator.connect(gain);
+
       gain.connect(ctx.destination);
 
-      oscillator.frequency.value = frequency;
+      oscillator.frequency.value =
+        frequency;
+
       oscillator.type = "square";
 
-      const start = ctx.currentTime + i * 0.12;
+      const start =
+        ctx.currentTime + i * 0.12;
 
-      gain.gain.setValueAtTime(0.12, start);
-      gain.gain.exponentialRampToValueAtTime(0.01, start + 0.22);
+      gain.gain.setValueAtTime(
+        0.12,
+        start
+      );
+
+      gain.gain.exponentialRampToValueAtTime(
+        0.01,
+        start + 0.22
+      );
 
       oscillator.start(start);
-      oscillator.stop(start + 0.22);
+
+      oscillator.stop(
+        start + 0.22
+      );
+
     });
 
   } catch (e) {}
+
 }
 
 changeColour(1);
 changeColour(2);
+
 </script>
 
 </body>
