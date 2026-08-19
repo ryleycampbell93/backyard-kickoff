@@ -323,13 +323,17 @@ body {
 
 </div>
 
+<audio
+  id="goalSound"
+  src="ElevenLabs_Generation_3.ogg"
+  preload="auto">
+</audio>
 
 <script>
 
 let scores = [0, 0];
 let lastTeam = null;
 let soundOn = true;
-let audioContext = null;
 
 function goal(team) {
 
@@ -350,12 +354,25 @@ function goal(team) {
     "⚽ GOOOOOOAL! " + name + "!";
 
   if (soundOn) {
-    playGoalCelebration();
+    playGoalSound();
   }
 
   setTimeout(() => {
     document.getElementById("goalMessage").textContent = "";
   }, 2200);
+}
+
+
+function playGoalSound() {
+
+  const sound =
+    document.getElementById("goalSound");
+
+  sound.pause();
+  sound.currentTime = 0;
+
+  sound.play().catch(() => {});
+
 }
 
 
@@ -421,158 +438,6 @@ function toggleSound() {
     soundOn
       ? "🔊 SOUND ON"
       : "🔇 SOUND OFF";
-
-}
-
-
-function playGoalCelebration() {
-
-  try {
-
-    const AudioContext =
-      window.AudioContext ||
-      window.webkitAudioContext;
-
-    if (!audioContext) {
-      audioContext = new AudioContext();
-    }
-
-    const ctx = audioContext;
-
-    if (ctx.state === "suspended") {
-      ctx.resume();
-    }
-
-    const now = ctx.currentTime;
-
-
-    // REFEREE WHISTLE
-    const whistle = ctx.createOscillator();
-    const whistleGain = ctx.createGain();
-
-    whistle.type = "sine";
-
-    whistle.frequency.setValueAtTime(2100, now);
-    whistle.frequency.linearRampToValueAtTime(2600, now + 0.25);
-    whistle.frequency.linearRampToValueAtTime(2200, now + 0.5);
-
-    whistleGain.gain.setValueAtTime(0.001, now);
-    whistleGain.gain.linearRampToValueAtTime(0.18, now + 0.03);
-    whistleGain.gain.linearRampToValueAtTime(0.001, now + 0.55);
-
-    whistle.connect(whistleGain);
-    whistleGain.connect(ctx.destination);
-
-    whistle.start(now);
-    whistle.stop(now + 0.6);
-
-
-    // CROWD ROAR
-    const duration = 2.4;
-
-    const buffer =
-      ctx.createBuffer(
-        1,
-        ctx.sampleRate * duration,
-        ctx.sampleRate
-      );
-
-    const data = buffer.getChannelData(0);
-
-    for (let i = 0; i < data.length; i++) {
-
-      const progress = i / data.length;
-
-      const rise = Math.min(progress * 7, 1);
-
-      const fade =
-        progress > 0.72
-          ? (1 - progress) / 0.28
-          : 1;
-
-      data[i] =
-        (Math.random() * 2 - 1) *
-        rise *
-        fade;
-
-    }
-
-    const crowd = ctx.createBufferSource();
-    crowd.buffer = buffer;
-
-    const crowdFilter = ctx.createBiquadFilter();
-
-    crowdFilter.type = "bandpass";
-    crowdFilter.frequency.value = 750;
-    crowdFilter.Q.value = 0.7;
-
-    const crowdGain = ctx.createGain();
-
-    crowdGain.gain.setValueAtTime(0.01, now + 0.18);
-    crowdGain.gain.linearRampToValueAtTime(0.36, now + 0.7);
-    crowdGain.gain.setValueAtTime(0.36, now + 1.4);
-    crowdGain.gain.linearRampToValueAtTime(0.01, now + 2.55);
-
-    crowd.connect(crowdFilter);
-    crowdFilter.connect(crowdGain);
-    crowdGain.connect(ctx.destination);
-
-    crowd.start(now + 0.18);
-
-
-    // STADIUM HORN
-    const horn = ctx.createOscillator();
-    const hornGain = ctx.createGain();
-
-    horn.type = "sawtooth";
-
-    horn.frequency.setValueAtTime(220, now + 0.55);
-    horn.frequency.linearRampToValueAtTime(330, now + 0.9);
-    horn.frequency.linearRampToValueAtTime(260, now + 1.35);
-
-    hornGain.gain.setValueAtTime(0.001, now + 0.5);
-    hornGain.gain.linearRampToValueAtTime(0.10, now + 0.62);
-    hornGain.gain.linearRampToValueAtTime(0.001, now + 1.45);
-
-    horn.connect(hornGain);
-    hornGain.connect(ctx.destination);
-
-    horn.start(now + 0.5);
-    horn.stop(now + 1.5);
-
-
-    // CELEBRATION CHIME
-    const notes = [523, 659, 784, 1046];
-
-    notes.forEach((frequency, i) => {
-
-      const oscillator =
-        ctx.createOscillator();
-
-      const gain =
-        ctx.createGain();
-
-      oscillator.type = "square";
-      oscillator.frequency.value = frequency;
-
-      const start =
-        now + 0.8 + (i * 0.11);
-
-      gain.gain.setValueAtTime(0.08, start);
-      gain.gain.exponentialRampToValueAtTime(
-        0.001,
-        start + 0.25
-      );
-
-      oscillator.connect(gain);
-      gain.connect(ctx.destination);
-
-      oscillator.start(start);
-      oscillator.stop(start + 0.25);
-
-    });
-
-  } catch (e) {}
 
 }
 
