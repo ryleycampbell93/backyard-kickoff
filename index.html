@@ -6,7 +6,9 @@
 <title>Backyard Kickoff</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -15,7 +17,7 @@ body {
   color: white;
   text-align: center;
   background:
-    linear-gradient(rgba(0,0,0,.30), rgba(0,0,0,.72)),
+    linear-gradient(rgba(0,0,0,.28), rgba(0,0,0,.78)),
     url("609DF914-C4E1-4512-9C0F-3E452062484D.png");
   background-size: cover;
   background-position: center;
@@ -24,120 +26,162 @@ body {
 
 .app {
   min-height: 100vh;
-  padding: 25px 14px 40px;
+  padding: 28px 14px 30px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 
+.header {
+  margin-bottom: 14px;
+}
+
 h1 {
-  font-size: 38px;
+  font-size: 34px;
   margin: 0;
   text-shadow: 0 3px 10px black;
 }
 
 .subtitle {
-  margin: 5px 0 18px;
+  margin-top: 6px;
+  font-size: 16px;
   font-weight: bold;
   text-shadow: 0 2px 6px black;
 }
 
+.goal-message {
+  min-height: 38px;
+  font-size: 26px;
+  font-weight: 900;
+  margin-bottom: 8px;
+  text-shadow: 0 3px 8px black;
+}
+
 .scoreboard {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .team {
-  flex: 1;
-  padding: 14px 9px;
+  background: rgba(0,0,0,.72);
+  border: 2px solid rgba(255,255,255,.4);
   border-radius: 22px;
-  background: rgba(0,0,0,.68);
-  backdrop-filter: blur(6px);
-  border: 2px solid rgba(255,255,255,.35);
+  padding: 13px;
+  backdrop-filter: blur(7px);
+}
+
+.team-top {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
 .team-name {
-  width: 100%;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 5px;
-  text-align: center;
-  font-size: 17px;
-  font-weight: bold;
-}
-
-.options {
-  display: flex;
-  gap: 5px;
-  margin-top: 8px;
-}
-
-select, input[type="color"] {
   flex: 1;
   min-width: 0;
-  height: 40px;
   border: none;
-  border-radius: 9px;
-  font-size: 18px;
+  border-radius: 12px;
+  padding: 12px 10px;
+  font-size: 19px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.flag-select {
+  width: 95px;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 5px;
+  font-size: 17px;
+}
+
+.colour-picker {
+  width: 52px;
+  height: 44px;
+  padding: 3px;
+  border: none;
+  border-radius: 12px;
+  background: white;
+}
+
+.team-main {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .flag {
-  font-size: 35px;
-  margin-top: 8px;
+  font-size: 42px;
 }
 
 .score {
-  font-size: 72px;
+  font-size: 70px;
   line-height: 1;
   font-weight: 900;
-  margin: 8px 0 12px;
   text-shadow: 0 3px 8px black;
 }
 
 .goal {
   width: 100%;
-  padding: 15px 4px;
+  min-height: 76px;
   border: none;
-  border-radius: 14px;
+  border-radius: 18px;
   color: white;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 900;
-  background: #16a34a;
+  box-shadow: 0 4px 12px rgba(0,0,0,.3);
 }
 
 .goal:active {
-  transform: scale(.95);
+  transform: scale(.96);
 }
 
 .controls {
-  margin-top: 14px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1.25fr 1fr;
   gap: 8px;
-  justify-content: center;
+  margin-top: 13px;
 }
 
 .control {
-  padding: 12px 16px;
   border: 2px solid white;
-  border-radius: 14px;
-  background: rgba(0,0,0,.65);
+  border-radius: 15px;
+  padding: 12px 5px;
+  background: rgba(0,0,0,.72);
   color: white;
-  font-weight: bold;
   font-size: 15px;
-}
-
-.goal-message {
-  height: 42px;
-  font-size: 30px;
-  font-weight: 900;
-  margin: 10px 0 4px;
-  text-shadow: 0 3px 8px black;
+  font-weight: bold;
 }
 
 .credit {
-  margin-top: 10px;
+  margin-top: 11px;
   font-size: 13px;
   opacity: .9;
+}
+
+@media (max-width: 390px) {
+  h1 {
+    font-size: 30px;
+  }
+
+  .team-main {
+    grid-template-columns: 65px 1fr 105px;
+  }
+
+  .score {
+    font-size: 62px;
+  }
+
+  .goal {
+    font-size: 16px;
+  }
+
+  .control {
+    font-size: 13px;
+  }
 }
 </style>
 </head>
@@ -146,70 +190,69 @@ select, input[type="color"] {
 
 <div class="app">
 
-  <h1>⚽ Backyard Kickoff</h1>
-  <div class="subtitle">Pick your teams. Start the match!</div>
+  <div class="header">
+    <h1>⚽ Backyard Kickoff</h1>
+    <div class="subtitle">Pick your teams. Start the match!</div>
+  </div>
 
   <div id="goalMessage" class="goal-message"></div>
 
   <div class="scoreboard">
 
     <div class="team">
-      <input class="team-name" id="name1" value="Arlo United">
+      <div class="team-top">
+        <input class="team-name" id="name1" value="Arlo United">
 
-      <div class="options">
-        <select id="flag1" onchange="changeFlag(1)">
-          <option value="🇦🇺">🇦🇺 Australia</option>
-          <option value="🇦🇷">🇦🇷 Argentina</option>
-          <option value="🇧🇷">🇧🇷 Brazil</option>
-          <option value="🇫🇷">🇫🇷 France</option>
-          <option value="🇩🇪">🇩🇪 Germany</option>
-          <option value="🇮🇹">🇮🇹 Italy</option>
-          <option value="🇵🇹">🇵🇹 Portugal</option>
-          <option value="🇪🇸">🇪🇸 Spain</option>
-          <option value="🏴">🏴 England</option>
-          <option value="🇳🇱">🇳🇱 Netherlands</option>
+        <select class="flag-select" id="flag1" onchange="changeFlag(1)">
+          <option value="🇦🇺">🇦🇺 AUS</option>
+          <option value="🇦🇷">🇦🇷 ARG</option>
+          <option value="🇧🇷">🇧🇷 BRA</option>
+          <option value="🇫🇷">🇫🇷 FRA</option>
+          <option value="🇩🇪">🇩🇪 GER</option>
+          <option value="🇮🇹">🇮🇹 ITA</option>
+          <option value="🇵🇹">🇵🇹 POR</option>
+          <option value="🇪🇸">🇪🇸 ESP</option>
+          <option value="🏴">🏴 ENG</option>
+          <option value="🇳🇱">🇳🇱 NED</option>
         </select>
 
-        <input type="color" id="colour1" value="#e11d48"
+        <input class="colour-picker" type="color" id="colour1" value="#e11d48"
           onchange="changeColour(1)">
       </div>
 
-      <div id="flagDisplay1" class="flag">🇦🇺</div>
-      <div id="score1" class="score">0</div>
-
-      <button id="goal1" class="goal" onclick="goal(1)">
-        ⚽ GOAL!
-      </button>
+      <div class="team-main">
+        <div id="flagDisplay1" class="flag">🇦🇺</div>
+        <div id="score1" class="score">0</div>
+        <button id="goal1" class="goal" onclick="goal(1)">⚽ GOAL!</button>
+      </div>
     </div>
 
-
     <div class="team">
-      <input class="team-name" id="name2" value="Dad FC">
+      <div class="team-top">
+        <input class="team-name" id="name2" value="Dad FC">
 
-      <div class="options">
-        <select id="flag2" onchange="changeFlag(2)">
-          <option value="🇦🇺">🇦🇺 Australia</option>
-          <option value="🇦🇷">🇦🇷 Argentina</option>
-          <option value="🇧🇷">🇧🇷 Brazil</option>
-          <option value="🇫🇷">🇫🇷 France</option>
-          <option value="🇩🇪">🇩🇪 Germany</option>
-          <option value="🇮🇹">🇮🇹 Italy</option>
-          <option value="🇵🇹">🇵🇹 Portugal</option>
-          <option value="🇪🇸">🇪🇸 Spain</option>
-          <option value="🏴">🏴 England</option>
-          <option value="🇳🇱">🇳🇱 Netherlands</option>
+        <select class="flag-select" id="flag2" onchange="changeFlag(2)">
+          <option value="🇦🇺">🇦🇺 AUS</option>
+          <option value="🇦🇷">🇦🇷 ARG</option>
+          <option value="🇧🇷">🇧🇷 BRA</option>
+          <option value="🇫🇷">🇫🇷 FRA</option>
+          <option value="🇩🇪">🇩🇪 GER</option>
+          <option value="🇮🇹">🇮🇹 ITA</option>
+          <option value="🇵🇹">🇵🇹 POR</option>
+          <option value="🇪🇸">🇪🇸 ESP</option>
+          <option value="🏴">🏴 ENG</option>
+          <option value="🇳🇱">🇳🇱 NED</option>
         </select>
 
-        <input type="color" id="colour2" value="#2563eb"
+        <input class="colour-picker" type="color" id="colour2" value="#2563eb"
           onchange="changeColour(2)">
       </div>
 
-      <div id="flagDisplay2" class="flag">🇦🇺</div>
-      <div id="score2" class="score">0</div>
-
-      <button id="goal2" class="goal" onclick="goal(2)">
-        ⚽ GOAL!
-      </button>
+      <div class="team-main">
+        <div id="flagDisplay2" class="flag">🇦🇺</div>
+        <div id="score2" class="score">0</div>
+        <button id="goal2" class="goal" onclick="goal(2)">⚽ GOAL!</button>
+      </div>
     </div>
 
   </div>
@@ -277,6 +320,7 @@ function changeColour(team) {
 
 function toggleSound() {
   soundOn = !soundOn;
+
   document.getElementById("goalMessage").textContent =
     soundOn ? "🔊 SOUND ON" : "🔇 SOUND OFF";
 }
@@ -306,6 +350,7 @@ function playGoalSound() {
       oscillator.start(start);
       oscillator.stop(start + 0.22);
     });
+
   } catch (e) {}
 }
 
